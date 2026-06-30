@@ -1,84 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HWP to TXT Converter</title>
-  <meta name="description" content="한글 문서를 TXT 파일로 변환하는 로컬 웹 도구">
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div class="app-shell">
-    <header class="hero">
-      <div class="hero-copy">
-        <p class="eyebrow">LOCAL DOCUMENT TOOL</p>
-        <h1>한글 파일을<br>TXT로 변환하세요</h1>
-        <p class="hero-text">
-          `.hwp`, `.hwpx` 문서를 업로드하면 텍스트를 추출해 미리보기와
-          `.txt` 다운로드까지 바로 처리합니다. 별도 설치 없이 로컬에서 실행됩니다.
-        </p>
-        <div class="hero-tags">
-          <span>단일 파일 변환</span>
-          <span>UTF-8 TXT 저장</span>
-          <span>로컬 실행</span>
-        </div>
-      </div>
-      <div class="hero-panel">
-        <strong>지원 형식</strong>
-        <ul>
-          <li><code>.hwpx</code> 본문 우선 추출</li>
-          <li><code>.hwp</code> 가능한 범위에서 텍스트 추출</li>
-          <li>추출 결과 미리보기 제공</li>
-          <li>원본 파일명 기준 TXT 다운로드</li>
-        </ul>
-      </div>
-    </header>
 
-    <main class="layout">
-      <section class="panel upload-panel">
-        <div class="section-head">
-          <p class="section-kicker">STEP 1</p>
-          <h2>파일 업로드</h2>
-        </div>
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>private</title>
+      <meta name="description" content="Create and showcase professional web portfolios with customizable templates, project highlights, and skill showcases tailored for product managers and developers." />
+      <meta name="robots" content="noindex, nofollow" />
+      <style>html, body { height: 100%; margin: 0; } #root { height: 100%; }</style>
+      
+    </head>
 
-        <label class="dropzone" id="dropzone">
-          <input type="file" id="fileInput" accept=".hwp,.hwpx" hidden>
-          <strong>여기에 파일을 놓거나 클릭해서 선택</strong>
-          <span>지원 형식: HWP, HWPX</span>
-          <small>대용량 문서나 이미지 중심 문서는 추출 결과가 제한될 수 있습니다.</small>
-        </label>
-
-        <div class="file-meta" id="fileMeta">
-          <span>선택된 파일이 없습니다.</span>
-        </div>
-
-        <div class="actions">
-          <button class="button primary" id="convertButton" disabled>TXT로 변환</button>
-          <button class="button secondary" id="resetButton" type="button">초기화</button>
-        </div>
-
-        <p class="status" id="statusMessage">파일을 선택하면 변환을 시작할 수 있습니다.</p>
-      </section>
-
-      <section class="panel result-panel">
-        <div class="section-head">
-          <p class="section-kicker">STEP 2</p>
-          <h2>변환 결과</h2>
-        </div>
-
-        <div class="result-summary" id="resultSummary">
-          <span>아직 변환된 결과가 없습니다.</span>
-        </div>
-
-        <pre class="preview" id="previewText">변환된 텍스트가 여기에 표시됩니다.</pre>
-
-        <div class="actions">
-          <button class="button primary" id="downloadButton" disabled>TXT 다운로드</button>
-        </div>
-      </section>
-    </main>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+    <body>
+      
+      <div id="root"></div>
+      <script type="module" src="/src/main.tsx"></script>
+      
+    </body>
+  </html>
+  

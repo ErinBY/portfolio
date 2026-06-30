@@ -267,8 +267,9 @@ export default function Portfolio() {
               {[
                 '기존 용어를 사용자 관점으로 재정의 (예: "외부 도메인 연결" → "보유 도메인 연결")',
                 "구매/연결/관리 3가지 목적별 CTA 우선순위 설계",
+                "도메인 전문 업체와 웹빌더 동종업체를 구분해 가격을 비교 분석하고, 확장자별 권장 판매가 정책 수립",
                 "v1 초안 → v3 최신까지 버전 관리하며 PRD 고도화",
-                "ChatGPT로 기획안 구체화, Figma AI로 PRD 문서화",
+                "ChatGPT로 기획안 구체화 → Codex로 직접 인터랙티브 PRD 구현",
               ].map((text, i) => (
                 <div key={i} style={{ display: "flex", gap: 8, alignItems: "flex-start", marginBottom: 8 }}>
                   <span style={{ color: "#F5C200", marginTop: 2 }}>✓</span>
@@ -276,6 +277,21 @@ export default function Portfolio() {
                 </div>
               ))}
             </div>
+            <a
+              href="https://erinby.github.io/domain-project/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20,
+                backgroundColor: "transparent", color: "#F5C200", border: "1.5px solid rgba(245,194,0,0.4)",
+                borderRadius: 40, padding: "10px 22px", fontSize: 13, fontWeight: 700, textDecoration: "none",
+                transition: "background-color 0.2s"
+              }}
+              onMouseEnter={e => (e.currentTarget.style.backgroundColor = "rgba(245,194,0,0.1)")}
+              onMouseLeave={e => (e.currentTarget.style.backgroundColor = "transparent")}
+            >
+              📎 PRD 문서 전문 보기
+            </a>
           </div>
         </div>
       </section>
