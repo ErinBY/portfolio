@@ -1,0 +1,352 @@
+{
+  "ontology": {
+    "name": "Kiosk Order Project Ontology",
+    "project": "Pure Order Kiosk Project",
+    "description": "JavaScript 기반 키오스크 주문 웹페이지를 화면, 메뉴, 장바구니, 주문, UI 디자인, 사용자 흐름 관점으로 구조화한 온톨로지"
+  },
+  "topLevelConcepts": [
+    {
+      "id": "Project",
+      "description": "키오스크 주문 웹페이지 전체 프로젝트"
+    },
+    {
+      "id": "Screen",
+      "description": "사용자에게 보여지는 개별 화면 또는 UI 단위"
+    },
+    {
+      "id": "MenuDomain",
+      "description": "메뉴, 카테고리, 옵션, 가격 관련 정보 영역"
+    },
+    {
+      "id": "CartDomain",
+      "description": "장바구니와 주문 항목 관련 정보 영역"
+    },
+    {
+      "id": "OrderDomain",
+      "description": "주문 확인과 결제 안내 관련 정보 영역"
+    },
+    {
+      "id": "UIDesign",
+      "description": "버튼, 카드, 타이포그래피, 색상, 레이아웃 등 UI 요소"
+    },
+    {
+      "id": "UserFlow",
+      "description": "사용자의 주문 진행 흐름"
+    }
+  ],
+  "classes": {
+    "project": [
+      "KioskOrderProject"
+    ],
+    "screen": [
+      "StartScreen",
+      "MenuSelectionScreen",
+      "OptionSelectionModal",
+      "CartScreen",
+      "OrderConfirmationScreen",
+      "PaymentGuideScreen"
+    ],
+    "menu": [
+      "MenuCategory",
+      "MenuItem",
+      "OptionGroup",
+      "OptionChoice",
+      "Price",
+      "Badge"
+    ],
+    "cartAndOrder": [
+      "Cart",
+      "CartItem",
+      "Order",
+      "OrderLine",
+      "PaymentGuide"
+    ],
+    "ui": [
+      "Button",
+      "Card",
+      "Sidebar",
+      "Modal",
+      "Typography",
+      "ColorToken",
+      "LayoutRule"
+    ],
+    "flow": [
+      "FlowStep",
+      "Interaction",
+      "State"
+    ]
+  },
+  "relations": {
+    "projectToScreen": [
+      "hasScreen",
+      "hasDesignSystem",
+      "hasFlowStep"
+    ],
+    "screenFlow": [
+      "nextScreen",
+      "opensModal",
+      "returnsTo"
+    ],
+    "menuStructure": [
+      "hasCategory",
+      "hasMenuItem",
+      "belongsToCategory",
+      "hasOptionGroup",
+      "hasOptionChoice",
+      "hasPrice",
+      "hasBadge"
+    ],
+    "cartAndOrder": [
+      "hasCart",
+      "containsCartItem",
+      "referencesMenuItem",
+      "hasSelectedOption",
+      "hasQuantity",
+      "hasTotalPrice",
+      "createsOrder"
+    ],
+    "uiDesign": [
+      "usesComponent",
+      "usesColorToken",
+      "usesTypography",
+      "usesLayoutRule",
+      "hasVisualState"
+    ],
+    "userFlow": [
+      "startsFrom",
+      "selectsCategory",
+      "selectsMenu",
+      "addsToCart",
+      "confirmsOrder",
+      "movesToPaymentGuide"
+    ]
+  },
+  "properties": {
+    "common": [
+      "id",
+      "name",
+      "description"
+    ],
+    "screen": [
+      "screenTitle",
+      "screenPurpose",
+      "displayOrder"
+    ],
+    "menu": [
+      "priceValue",
+      "categoryName",
+      "isPopular",
+      "isRequired"
+    ],
+    "cart": [
+      "quantityValue",
+      "lineTotal",
+      "cartTotal"
+    ],
+    "design": [
+      "colorHex",
+      "fontSize",
+      "fontWeight",
+      "borderRadius",
+      "spacingValue"
+    ]
+  },
+  "instances": {
+    "project": {
+      "id": "PureOrderKioskProject",
+      "type": "KioskOrderProject"
+    },
+    "screens": [
+      {
+        "id": "StartScreen_Main",
+        "type": "StartScreen",
+        "name": "시작 화면"
+      },
+      {
+        "id": "MenuSelectionScreen_Main",
+        "type": "MenuSelectionScreen",
+        "name": "메뉴 선택 화면"
+      },
+      {
+        "id": "OptionSelectionModal_Main",
+        "type": "OptionSelectionModal",
+        "name": "옵션 선택 모달"
+      }
+    ],
+    "categories": [
+      {
+        "id": "Category_Burger",
+        "type": "MenuCategory",
+        "name": "버거"
+      },
+      {
+        "id": "Category_Set",
+        "type": "MenuCategory",
+        "name": "세트"
+      },
+      {
+        "id": "Category_Side",
+        "type": "MenuCategory",
+        "name": "사이드"
+      },
+      {
+        "id": "Category_Drink",
+        "type": "MenuCategory",
+        "name": "음료"
+      }
+    ],
+    "menuItems": [
+      {
+        "id": "Menu_ClassicBurger",
+        "type": "MenuItem",
+        "name": "클래식 버거",
+        "description": "담백한 패티와 신선한 채소가 들어간 기본 버거",
+        "priceValue": 6800,
+        "category": "Category_Burger",
+        "optionGroups": [
+          "OptionGroup_Size",
+          "OptionGroup_Extra"
+        ]
+      },
+      {
+        "id": "Menu_SignatureBurger",
+        "type": "MenuItem",
+        "name": "시그니처 버거",
+        "description": "고소한 소스와 풍성한 토핑이 들어간 대표 메뉴",
+        "priceValue": 7900,
+        "category": "Category_Burger",
+        "optionGroups": [
+          "OptionGroup_Size",
+          "OptionGroup_Extra"
+        ]
+      }
+    ],
+    "optionGroups": [
+      {
+        "id": "OptionGroup_Size",
+        "type": "OptionGroup",
+        "name": "사이즈",
+        "choices": [
+          "Choice_Single",
+          "Choice_Set"
+        ]
+      },
+      {
+        "id": "OptionGroup_Extra",
+        "type": "OptionGroup",
+        "name": "추가 선택",
+        "choices": [
+          "Choice_Cheese",
+          "Choice_Bacon"
+        ]
+      }
+    ],
+    "optionChoices": [
+      {
+        "id": "Choice_Single",
+        "type": "OptionChoice",
+        "name": "단품"
+      },
+      {
+        "id": "Choice_Set",
+        "type": "OptionChoice",
+        "name": "세트"
+      },
+      {
+        "id": "Choice_Cheese",
+        "type": "OptionChoice",
+        "name": "치즈 추가"
+      },
+      {
+        "id": "Choice_Bacon",
+        "type": "OptionChoice",
+        "name": "베이컨 추가"
+      }
+    ],
+    "uiTokens": {
+      "colors": [
+        {
+          "id": "Color_White",
+          "type": "ColorToken",
+          "name": "화이트",
+          "colorHex": "#ffffff"
+        },
+        {
+          "id": "Color_PointBlack",
+          "type": "ColorToken",
+          "name": "포인트 블랙",
+          "colorHex": "#111111"
+        },
+        {
+          "id": "Color_SoftGray",
+          "type": "ColorToken",
+          "name": "소프트 그레이",
+          "colorHex": "#f8f8f6"
+        }
+      ],
+      "typography": [
+        {
+          "id": "Typography_DisplayHeading",
+          "type": "Typography",
+          "name": "디스플레이 헤딩"
+        }
+      ],
+      "layoutRules": [
+        {
+          "id": "Layout_ThreeColumnKiosk",
+          "type": "LayoutRule",
+          "name": "3단 키오스크 레이아웃"
+        }
+      ]
+    },
+    "flowSteps": [
+      {
+        "id": "Flow_Start",
+        "type": "FlowStep",
+        "name": "시작"
+      },
+      {
+        "id": "Flow_MenuSelect",
+        "type": "FlowStep",
+        "name": "메뉴 선택"
+      },
+      {
+        "id": "Flow_OptionSelect",
+        "type": "FlowStep",
+        "name": "옵션 선택"
+      },
+      {
+        "id": "Flow_CartReview",
+        "type": "FlowStep",
+        "name": "장바구니 확인"
+      }
+    ]
+  },
+  "exampleTriplesAsJson": [
+    {
+      "subject": "PureOrderKioskProject",
+      "predicate": "hasScreen",
+      "object": "StartScreen_Main"
+    },
+    {
+      "subject": "PureOrderKioskProject",
+      "predicate": "hasScreen",
+      "object": "MenuSelectionScreen_Main"
+    },
+    {
+      "subject": "MenuSelectionScreen_Main",
+      "predicate": "opensModal",
+      "object": "OptionSelectionModal_Main"
+    },
+    {
+      "subject": "Menu_ClassicBurger",
+      "predicate": "belongsToCategory",
+      "object": "Category_Burger"
+    },
+    {
+      "subject": "MenuSelectionScreen_Main",
+      "predicate": "usesLayoutRule",
+      "object": "Layout_ThreeColumnKiosk"
+    }
+  ]
+}

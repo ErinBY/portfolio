@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pure Order Kiosk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=SUIT:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section class="screen screen-start active" data-screen="start">
+        <div class="hero-card">
+          <p class="eyebrow">Self Order Kiosk</p>
+          <h1>깔끔하고 빠른 주문 경험</h1>
+          <p class="hero-copy">
+            화이트 베이스의 직관적인 키오스크 화면으로 메뉴 탐색부터 주문
+            확인까지 한 번에 진행합니다.
+          </p>
+          <div class="hero-actions">
+            <button class="primary-button" id="startOrderButton">주문 시작</button>
+            <button class="ghost-button" id="previewMenuButton">메뉴 미리보기</button>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-card">
+            <span class="panel-label">추천 흐름</span>
+            <ol class="flow-list">
+              <li>카테고리 선택</li>
+              <li>메뉴 옵션 선택</li>
+              <li>장바구니 확인</li>
+              <li>주문 확인 후 결제 안내</li>
+            </ol>
+          </div>
+          <div class="panel-card">
+            <span class="panel-label">1단계 구현 범위</span>
+            <ul class="feature-list">
+              <li>시작 화면</li>
+              <li>메뉴 선택 화면</li>
+              <li>상세 옵션 모달</li>
+              <li>장바구니 요약</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen screen-kiosk" data-screen="kiosk">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Pure Order</p>
+            <h2>키오스크 주문 페이지</h2>
+            <div class="topbar-meta">
+              <span class="meta-pill">White Base UI</span>
+              <span class="meta-pill">Touch Friendly</span>
+              <span class="meta-pill">JavaScript</span>
+            </div>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost-button small" id="backToStartButton">처음으로</button>
+            <button class="primary-button small" id="checkoutButton">주문 확인</button>
+          </div>
+        </header>
+
+        <div class="progress-strip">
+          <span class="step-chip active">1. 메뉴 선택</span>
+          <span class="step-chip">2. 옵션 선택</span>
+          <span class="step-chip">3. 장바구니 확인</span>
+          <span class="step-chip">4. 결제 안내</span>
+        </div>
+
+        <main class="kiosk-layout">
+          <aside class="category-sidebar">
+            <div class="sidebar-header">
+              <h3>카테고리</h3>
+              <p>원하는 메뉴를 빠르게 골라보세요.</p>
+            </div>
+            <div class="category-list" id="categoryList"></div>
+          </aside>
+
+          <section class="menu-section">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Menu</p>
+                <h3 id="menuSectionTitle">전체 메뉴</h3>
+              </div>
+              <p class="section-note" id="menuSectionNote">메뉴를 선택하면 옵션 창이 열립니다.</p>
+            </div>
+            <div class="style-banner">
+              <span>공통 스타일 적용</span>
+              <strong>버튼, 카드, 타이포, 간격 규칙이 통일된 상태입니다.</strong>
+            </div>
+            <div class="menu-meta">
+              <span class="menu-count" id="menuCountText">총 0개 메뉴</span>
+              <span class="menu-guide">카드를 누르면 상세 옵션을 확인할 수 있습니다.</span>
+            </div>
+            <div class="menu-grid" id="menuGrid"></div>
+          </section>
+
+          <aside class="cart-sidebar">
+            <div class="section-header compact">
+              <div>
+                <p class="eyebrow">Cart</p>
+                <h3>장바구니</h3>
+              </div>
+            </div>
+            <div class="cart-list" id="cartList"></div>
+            <div class="cart-footer">
+              <div class="cart-total-row">
+                <span>총 금액</span>
+                <strong id="cartTotal">0원</strong>
+              </div>
+              <button class="primary-button full" id="cartCheckoutButton">
+                주문 확인으로 이동
+              </button>
+            </div>
+          </aside>
+        </main>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="menuModal">
+      <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="icon-button" id="closeModalButton" aria-label="닫기">×</button>
+        <div class="modal-visual" id="modalVisual"></div>
+        <div class="modal-content">
+          <p class="eyebrow">Menu Detail</p>
+          <h3 id="modalTitle"></h3>
+          <p class="modal-price" id="modalPrice"></p>
+          <p class="modal-description" id="modalDescription"></p>
+
+          <div class="option-group">
+            <span class="option-label">사이즈</span>
+            <div class="choice-row" id="sizeChoices"></div>
+          </div>
+
+          <div class="option-group">
+            <span class="option-label">추가 선택</span>
+            <div class="choice-row" id="extraChoices"></div>
+          </div>
+
+          <div class="quantity-row">
+            <span class="option-label">수량</span>
+            <div class="quantity-control">
+              <button class="ghost-button small" id="decreaseQtyButton">-</button>
+              <strong id="quantityValue">1</strong>
+              <button class="ghost-button small" id="increaseQtyButton">+</button>
+            </div>
+          </div>
+
+          <button class="primary-button full" id="addToCartButton">장바구니 담기</button>
+        </div>
+      </div>
+    </div>
+
+    <template id="menuCardTemplate">
+      <article class="menu-card">
+        <div class="menu-visual">
+          <span class="badge">POPULAR</span>
+        </div>
+        <div class="menu-card-body">
+          <div class="menu-card-header">
+            <h4></h4>
+            <span class="price"></span>
+          </div>
+          <p class="description"></p>
+          <button class="ghost-button full">옵션 선택</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,191 @@
+@prefix ex: <http://example.com/kiosk-order#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:KioskOrderOntology a owl:Ontology ;
+  rdfs:label "Kiosk Order Project Ontology"@en ;
+  rdfs:comment "Ontology for a JavaScript-based kiosk ordering web project."@en .
+
+ex:KioskOrderProject a owl:Class .
+ex:Screen a owl:Class .
+ex:StartScreen a owl:Class ; rdfs:subClassOf ex:Screen .
+ex:MenuSelectionScreen a owl:Class ; rdfs:subClassOf ex:Screen .
+ex:OptionSelectionModal a owl:Class ; rdfs:subClassOf ex:Screen .
+ex:CartScreen a owl:Class ; rdfs:subClassOf ex:Screen .
+ex:OrderConfirmationScreen a owl:Class ; rdfs:subClassOf ex:Screen .
+ex:PaymentGuideScreen a owl:Class ; rdfs:subClassOf ex:Screen .
+
+ex:MenuCategory a owl:Class .
+ex:MenuItem a owl:Class .
+ex:OptionGroup a owl:Class .
+ex:OptionChoice a owl:Class .
+ex:Badge a owl:Class .
+ex:Price a owl:Class .
+
+ex:Cart a owl:Class .
+ex:CartItem a owl:Class .
+ex:Order a owl:Class .
+ex:OrderLine a owl:Class .
+
+ex:UIDesign a owl:Class .
+ex:Button a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:Card a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:Sidebar a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:Modal a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:Typography a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:ColorToken a owl:Class ; rdfs:subClassOf ex:UIDesign .
+ex:LayoutRule a owl:Class ; rdfs:subClassOf ex:UIDesign .
+
+ex:FlowStep a owl:Class .
+ex:State a owl:Class .
+
+ex:hasScreen a owl:ObjectProperty ;
+  rdfs:domain ex:KioskOrderProject ;
+  rdfs:range ex:Screen .
+
+ex:nextScreen a owl:ObjectProperty ;
+  rdfs:domain ex:Screen ;
+  rdfs:range ex:Screen .
+
+ex:opensModal a owl:ObjectProperty ;
+  rdfs:domain ex:Screen ;
+  rdfs:range ex:OptionSelectionModal .
+
+ex:hasCategory a owl:ObjectProperty ;
+  rdfs:domain ex:KioskOrderProject ;
+  rdfs:range ex:MenuCategory .
+
+ex:hasMenuItem a owl:ObjectProperty ;
+  rdfs:domain ex:MenuCategory ;
+  rdfs:range ex:MenuItem .
+
+ex:belongsToCategory a owl:ObjectProperty ;
+  rdfs:domain ex:MenuItem ;
+  rdfs:range ex:MenuCategory .
+
+ex:hasOptionGroup a owl:ObjectProperty ;
+  rdfs:domain ex:MenuItem ;
+  rdfs:range ex:OptionGroup .
+
+ex:hasOptionChoice a owl:ObjectProperty ;
+  rdfs:domain ex:OptionGroup ;
+  rdfs:range ex:OptionChoice .
+
+ex:hasCart a owl:ObjectProperty ;
+  rdfs:domain ex:KioskOrderProject ;
+  rdfs:range ex:Cart .
+
+ex:containsCartItem a owl:ObjectProperty ;
+  rdfs:domain ex:Cart ;
+  rdfs:range ex:CartItem .
+
+ex:referencesMenuItem a owl:ObjectProperty ;
+  rdfs:domain ex:CartItem ;
+  rdfs:range ex:MenuItem .
+
+ex:usesColorToken a owl:ObjectProperty ;
+  rdfs:domain ex:UIDesign ;
+  rdfs:range ex:ColorToken .
+
+ex:usesTypography a owl:ObjectProperty ;
+  rdfs:domain ex:UIDesign ;
+  rdfs:range ex:Typography .
+
+ex:usesLayoutRule a owl:ObjectProperty ;
+  rdfs:domain ex:Screen ;
+  rdfs:range ex:LayoutRule .
+
+ex:hasFlowStep a owl:ObjectProperty ;
+  rdfs:domain ex:KioskOrderProject ;
+  rdfs:range ex:FlowStep .
+
+ex:name a owl:DatatypeProperty ;
+  rdfs:range xsd:string .
+
+ex:description a owl:DatatypeProperty ;
+  rdfs:range xsd:string .
+
+ex:priceValue a owl:DatatypeProperty ;
+  rdfs:range xsd:integer .
+
+ex:quantityValue a owl:DatatypeProperty ;
+  rdfs:range xsd:integer .
+
+ex:colorHex a owl:DatatypeProperty ;
+  rdfs:range xsd:string .
+
+ex:PureOrderKioskProject a ex:KioskOrderProject ;
+  ex:name "Pure Order Kiosk Project" ;
+  ex:hasScreen ex:StartScreen_Main, ex:MenuSelectionScreen_Main, ex:OptionSelectionModal_Main ;
+  ex:hasCategory ex:Category_Burger, ex:Category_Set, ex:Category_Side, ex:Category_Drink ;
+  ex:hasCart ex:Cart_Main ;
+  ex:hasFlowStep ex:Flow_Start, ex:Flow_MenuSelect, ex:Flow_OptionSelect, ex:Flow_CartReview .
+
+ex:StartScreen_Main a ex:StartScreen ;
+  ex:name "시작 화면" ;
+  ex:nextScreen ex:MenuSelectionScreen_Main .
+
+ex:MenuSelectionScreen_Main a ex:MenuSelectionScreen ;
+  ex:name "메뉴 선택 화면" ;
+  ex:opensModal ex:OptionSelectionModal_Main ;
+  ex:usesLayoutRule ex:Layout_ThreeColumnKiosk .
+
+ex:OptionSelectionModal_Main a ex:OptionSelectionModal ;
+  ex:name "옵션 선택 모달" .
+
+ex:Category_Burger a ex:MenuCategory ; ex:name "버거" .
+ex:Category_Set a ex:MenuCategory ; ex:name "세트" .
+ex:Category_Side a ex:MenuCategory ; ex:name "사이드" .
+ex:Category_Drink a ex:MenuCategory ; ex:name "음료" .
+
+ex:OptionGroup_Size a ex:OptionGroup ; ex:name "사이즈" .
+ex:OptionGroup_Extra a ex:OptionGroup ; ex:name "추가 선택" .
+
+ex:Choice_Single a ex:OptionChoice ; ex:name "단품" .
+ex:Choice_Set a ex:OptionChoice ; ex:name "세트" .
+ex:Choice_Cheese a ex:OptionChoice ; ex:name "치즈 추가" .
+ex:Choice_Bacon a ex:OptionChoice ; ex:name "베이컨 추가" .
+
+ex:OptionGroup_Size ex:hasOptionChoice ex:Choice_Single, ex:Choice_Set .
+ex:OptionGroup_Extra ex:hasOptionChoice ex:Choice_Cheese, ex:Choice_Bacon .
+
+ex:Menu_ClassicBurger a ex:MenuItem ;
+  ex:name "클래식 버거" ;
+  ex:description "담백한 패티와 신선한 채소가 들어간 기본 버거" ;
+  ex:priceValue 6800 ;
+  ex:belongsToCategory ex:Category_Burger ;
+  ex:hasOptionGroup ex:OptionGroup_Size, ex:OptionGroup_Extra .
+
+ex:Menu_SignatureBurger a ex:MenuItem ;
+  ex:name "시그니처 버거" ;
+  ex:description "고소한 소스와 풍성한 토핑이 들어간 대표 메뉴" ;
+  ex:priceValue 7900 ;
+  ex:belongsToCategory ex:Category_Burger ;
+  ex:hasOptionGroup ex:OptionGroup_Size, ex:OptionGroup_Extra .
+
+ex:Category_Burger ex:hasMenuItem ex:Menu_ClassicBurger, ex:Menu_SignatureBurger .
+
+ex:Cart_Main a ex:Cart ;
+  ex:name "메인 장바구니" .
+
+ex:Layout_ThreeColumnKiosk a ex:LayoutRule ;
+  ex:name "3단 키오스크 레이아웃" .
+
+ex:Color_White a ex:ColorToken ; ex:name "화이트" ; ex:colorHex "#ffffff" .
+ex:Color_PointBlack a ex:ColorToken ; ex:name "포인트 블랙" ; ex:colorHex "#111111" .
+ex:Color_SoftGray a ex:ColorToken ; ex:name "소프트 그레이" ; ex:colorHex "#f8f8f6" .
+
+ex:Typography_DisplayHeading a ex:Typography ;
+  ex:name "디스플레이 헤딩" .
+
+ex:PrimaryButton a ex:Button ;
+  ex:name "주요 버튼" ;
+  ex:usesColorToken ex:Color_PointBlack ;
+  ex:usesTypography ex:Typography_DisplayHeading .
+
+ex:Flow_Start a ex:FlowStep ; ex:name "시작" .
+ex:Flow_MenuSelect a ex:FlowStep ; ex:name "메뉴 선택" .
+ex:Flow_OptionSelect a ex:FlowStep ; ex:name "옵션 선택" .
+ex:Flow_CartReview a ex:FlowStep ; ex:name "장바구니 확인" .
