@@ -103,7 +103,7 @@ export default function Portfolio() {
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
           <p style={{ fontSize: 12, letterSpacing: 3, color: "#F5C200", marginBottom: 12, textTransform: "uppercase", fontWeight: 600 }}>About Me</p>
           <h2 style={{ fontSize: "clamp(28px, 5vw, 44px)", fontWeight: 800, marginBottom: 48, color: "#FFFFFF" }}>저를 소개합니다</h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          <div className="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
             <div style={{ backgroundColor: "#1E1E28", borderRadius: 16, padding: 28, border: "1px solid rgba(255,255,255,0.07)" }}>
               <p style={{ fontSize: 11, letterSpacing: 2, color: "#F5C200", marginBottom: 12, textTransform: "uppercase" }}>경력사항</p>
               {[
@@ -369,10 +369,11 @@ export default function Portfolio() {
 
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;800;900&display=swap');
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; word-break: keep-all; overflow-wrap: break-word; }
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
           .hamburger { display: block !important; }
+          .about-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
