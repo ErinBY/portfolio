@@ -363,7 +363,7 @@ export default function Portfolio() {
               onMouseLeave={e => (e.currentTarget.style.opacity = "1")}>
               <Mail size={16} /> se.young492@gmail.com
             </a>
-            <a href="https://github.com/ErinBY" target="_blank" rel="noopener noreferrer"
+            <a href="https://github.com/ErinBY/owl_booking" target="_blank" rel="noopener noreferrer"
               onClick={() => {
                 if (typeof window !== 'undefined' && (window as any).gtag) {
                   (window as any).gtag('event', 'click', {
