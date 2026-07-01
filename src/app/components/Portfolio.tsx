@@ -281,6 +281,15 @@ export default function Portfolio() {
               href="https://erinby.github.io/domain-project/"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag('event', 'click', {
+                    event_category: 'outbound',
+                    event_label: 'domain_prd',
+                    value: 1
+                  });
+                }
+              }}
               style={{
                 display: "inline-flex", alignItems: "center", gap: 8, marginTop: 20,
                 backgroundColor: "transparent", color: "#F5C200", border: "1.5px solid rgba(245,194,0,0.4)",
@@ -355,6 +364,15 @@ export default function Portfolio() {
               <Mail size={16} /> se.young492@gmail.com
             </a>
             <a href="https://github.com/ErinBY" target="_blank" rel="noopener noreferrer"
+              onClick={() => {
+                if (typeof window !== 'undefined' && (window as any).gtag) {
+                  (window as any).gtag('event', 'click', {
+                    event_category: 'outbound',
+                    event_label: 'github_profile',
+                    value: 1
+                  });
+                }
+              }}
               style={{ display: "flex", alignItems: "center", gap: 8, backgroundColor: "transparent", color: "#F0F0F0", border: "1.5px solid rgba(255,255,255,0.25)", borderRadius: 40, padding: "14px 28px", fontSize: 14, fontWeight: 600, textDecoration: "none" }}>
               <Github size={16} /> GitHub
             </a>
